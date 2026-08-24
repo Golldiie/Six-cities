@@ -1,5 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute } from '../const';
 import MainPage from '../pages/main-page/main-page';
 import FavouritesPage from '../pages/favourites-page/favourites-page';
 import LoginPage from '../pages/login-page/login-page';
@@ -12,18 +12,19 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          path={AppRoute.Root} element= {<MainPage places={5} />}
+          path={AppRoute.ROOT} element= {<MainPage places={5} />}
         />
         <Route
-          path={AppRoute.Login} element = {<LoginPage />}
+          path={AppRoute.LOGIN} element = {<LoginPage />}
         />
         <Route
-          path={AppRoute.Offer} element = {<OfferPage />}
+          path={AppRoute.OFFER} element = {<OfferPage />}
         />
         <Route
-          path={AppRoute.Favorites} element = {
+          path={AppRoute.FAVORITES} element = {
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              navigatePath={AppRoute.LOGIN}
+              isNeedNavigate
             >
               <FavouritesPage />
             </PrivateRoute>
