@@ -1,4 +1,4 @@
-function OfferGallery(){
+function OfferGallery(): JSX.Element{
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">

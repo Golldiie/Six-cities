@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 function MainPageEmpty(){
   return (
     <div className="page page--gray page--main">
-      <Header isSigned favourites={3} isMainPage />
+      <Header isSigned={false} favourites={3} isMainPage />
       <main className="page__main page__main--index page__main--index-empty">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

@@ -10,7 +10,7 @@ function MainPage({ places }: MainPageProps): JSX.Element{
 
   return (
     <div className="page page--gray page--main">
-      <Header isSigned favourites={3} isMainPage />
+      <Header isSigned={false} favourites={3} isMainPage />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

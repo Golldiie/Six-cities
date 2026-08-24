@@ -5,7 +5,7 @@ import OfferReviews from '../../components/offer-reviews/offer-reviews';
 function OfferPage(): JSX.Element {
   return (
     <div className="page">
-      <Header isSigned favourites={3} isMainPage={false} />
+      <Header isSigned={false} favourites={3} isMainPage={false} />
       <main className="page__main page__main--offer">
         <section className="offer">
           <OfferGallery />

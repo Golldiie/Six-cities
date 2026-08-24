@@ -4,7 +4,7 @@ import PlaceCard from '../../components/place-card/place-card';
 function FavouritesPage(): JSX.Element {
   return (
     <div className="page">
-      <Header isSigned favourites={3} isMainPage={false} />
+      <Header isSigned={false} favourites={3} isMainPage={false} />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
