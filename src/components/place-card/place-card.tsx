@@ -1,16 +1,10 @@
-type PlaceCardProps = {
-  id: string;
-  title: string;
-  type: string;
-  price: number;
-  rating: number;
-  previewImage: string;
-  isPremium: boolean;
-  isFavourite: boolean;
+import { Offer } from '../../mocks/offers/offers-types';
+
+type PlaceCardProps = Offer & {
   cardType?: 'cities' | 'favorites';
 }
 
-function PlaceCard({id, title, type, price, rating, previewImage, isPremium, isFavourite, cardType = 'cities'} : PlaceCardProps): JSX.Element {
+function PlaceCard({id, title, type, price, rating, previewImage, isPremium, isFavorite, cardType = 'cities'}: PlaceCardProps) :JSX.Element {
   const ratingWidth = `${Math.round(rating) * 20}%`;
 
   const isFavoritesType = cardType === 'favorites';
@@ -34,11 +28,11 @@ function PlaceCard({id, title, type, price, rating, previewImage, isPremium, isF
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavourite ? 'place-card__bookmark-button--active' : ''}`} type="button">
+          <button className={`place-card__bookmark-button button ${isFavorite ? 'place-card__bookmark-button--active' : ''}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">{isFavourite ? 'In bookmarks' : 'To bookmarks'}</span>
+            <span className="visually-hidden">{isFavorite ? 'In bookmarks' : 'To bookmarks'}</span>
           </button>
         </div>
         <div className="place-card__rating rating">

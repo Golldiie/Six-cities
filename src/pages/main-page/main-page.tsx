@@ -79,7 +79,7 @@ function MainPage({ places }: MainPageProps): JSX.Element{
                   rating = {4}
                   previewImage = 'img/apartment-01.jpg'
                   isPremium
-                  isFavourite = {false}
+                  isFavorite = {false}
                 />
 
                 <PlaceCard
@@ -90,7 +90,7 @@ function MainPage({ places }: MainPageProps): JSX.Element{
                   rating = {4}
                   previewImage = 'img/room.jpg'
                   isPremium = {false}
-                  isFavourite
+                  isFavorite
                 />
 
                 <PlaceCard
@@ -101,7 +101,7 @@ function MainPage({ places }: MainPageProps): JSX.Element{
                   rating = {4}
                   previewImage = 'img/apartment-02.jpg'
                   isPremium = {false}
-                  isFavourite = {false}
+                  isFavorite = {false}
                 />
 
                 <PlaceCard
@@ -112,7 +112,7 @@ function MainPage({ places }: MainPageProps): JSX.Element{
                   rating = {5}
                   previewImage = 'img/apartment-03.jpg'
                   isPremium
-                  isFavourite = {false}
+                  isFavorite = {false}
                 />
 
                 <PlaceCard
@@ -123,7 +123,7 @@ function MainPage({ places }: MainPageProps): JSX.Element{
                   rating = {4}
                   previewImage = 'img/room.jpg'
                   isPremium = {false}
-                  isFavourite
+                  isFavorite
                 />
               </div>
             </section>
