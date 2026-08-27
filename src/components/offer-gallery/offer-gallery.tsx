@@ -1,9 +1,17 @@
-function OfferGallery(): JSX.Element{
+import { Offer } from '../../mocks/offers/offers-types';
+
+type OfferGalleryProps = {
+  offer: Offer;
+}
+
+function OfferGallery({offer}: OfferGalleryProps): JSX.Element{
+  const { title, previewImage } = offer;
+
   return (
     <div className="offer__gallery-container container">
       <div className="offer__gallery">
         <div className="offer__image-wrapper">
-          <img className="offer__image" src="img/room.jpg" alt="Photo studio" />
+          <img className="offer__image" src={previewImage} alt={title} />
         </div>
         <div className="offer__image-wrapper">
           <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio" />

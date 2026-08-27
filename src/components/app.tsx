@@ -1,6 +1,7 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import { AppRoute } from '../const';
 import { Offer } from '../mocks/offers/offers-types';
+import { mockOffers } from '../mocks/offers/offers';
 import MainPage from '../pages/main-page/main-page';
 import FavouritesPage from '../pages/favourites-page/favourites-page';
 import LoginPage from '../pages/login-page/login-page';
@@ -32,7 +33,7 @@ function App({ offers }: AppProps): JSX.Element {
               navigatePath={AppRoute.LOGIN}
               isNeedNavigate
             >
-              <FavouritesPage />
+              <FavouritesPage offers={Array.isArray(mockOffers) ? mockOffers.filter((offer) => offer.isFavorite) : []} />
             </PrivateRoute>
           }
         />

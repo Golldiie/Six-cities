@@ -1,14 +1,23 @@
+import { useParams } from 'react-router-dom';
+import { mockOffers } from '../../mocks/offers/offers';
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
 
 function OfferPage(): JSX.Element {
+  const { id } = useParams();
+
+  const offer = mockOffers.find((item) => item.id === id);
+  if (!offer) {
+    return <div>Offer not found</div>;
+  }
+
   return (
     <div className="page">
       <Header isSigned={false} favourites={3} isMainPage={false} />
       <main className="page__main page__main--offer">
         <section className="offer">
-          <OfferGallery />
+          <OfferGallery offer={offer} />
           <div className="offer__container container">
             <div className="offer__wrapper">
               <div className="offer__mark">
@@ -16,7 +25,7 @@ function OfferPage(): JSX.Element {
               </div>
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {offer.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -30,7 +39,7 @@ function OfferPage(): JSX.Element {
                   <span style={{width: '80%'}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{offer.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
@@ -44,7 +53,7 @@ function OfferPage(): JSX.Element {
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">{offer.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
