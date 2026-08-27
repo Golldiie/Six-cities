@@ -4,8 +4,8 @@ type MapProps = {
   offers: Offer[];
   activeOfferId: string | null;
 };
-
-function OffersMap({ offers, activeOfferId }: MapProps): JSX.Element {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+function OffersMap(_props: MapProps): JSX.Element {
   return (
     <div className="cities__right-section">
       <section className="cities__map map"></section>
