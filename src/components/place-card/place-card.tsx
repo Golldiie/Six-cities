@@ -1,26 +1,39 @@
+import { Link } from 'react-router-dom';
 import { Offer } from '../../mocks/offers/offers-types';
 
 type PlaceCardProps = Offer & {
   cardType?: 'cities' | 'favorites';
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-function PlaceCard({id, title, type, price, rating, previewImage, isPremium, isFavorite, cardType = 'cities'}: PlaceCardProps) :JSX.Element {
+function PlaceCard({id, title, type, price, rating, previewImage, isPremium, isFavorite, cardType = 'cities', onMouseEnter, onMouseLeave}: PlaceCardProps) :JSX.Element {
   const ratingWidth = `${Math.round(rating) * 20}%`;
 
   const isFavoritesType = cardType === 'favorites';
   const imageWidth = isFavoritesType ? 150 : 260;
   const imageHeight = isFavoritesType ? 110 : 200;
   return (
-    <article className={`${cardType}__card place-card`}>
+    <article
+      className={`${cardType}__card place-card`}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
         </div>
       )}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
-        <a href={`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt={title} />
-        </a>
+        <Link to={`/offer/${id}`}>
+          <img
+            className="place-card__image"
+            src={previewImage}
+            width={imageWidth}
+            height={imageHeight}
+            alt={title}
+          />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -42,7 +55,9 @@ function PlaceCard({id, title, type, price, rating, previewImage, isPremium, isF
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
