@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+
 type HeaderProps = {
   isSigned: boolean;
   favourites: number;
@@ -11,25 +14,22 @@ function Header({isSigned, favourites, isMainPage = false, isLoginPage = false} 
       <div className="container">
         <div className="header__wrapper">
           <div className="header__left">
-            <a
-              className={`header__logo-link ${isMainPage ? 'header__logo-link--active' : ''}`}
-              href={isMainPage ? undefined : '/'}
-            >
-              <img
-                className="header__logo"
-                src="img/logo.svg"
-                alt="6 cities logo"
-                width="81"
-                height="41"
-              />
-            </a>
+            {isMainPage ? (
+              <span className="header__logo-link header__logo-link--active">
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+              </span>
+            ) : (
+              <Link className="header__logo-link" to="/">
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+              </Link>
+            )}
           </div>
 
           {!isLoginPage && (
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
 
@@ -45,14 +45,14 @@ function Header({isSigned, favourites, isMainPage = false, isLoginPage = false} 
                     ) : (
                       <span className="header__login">Sign in</span>
                     )}
-                  </a>
+                  </Link>
                 </li>
 
                 {isSigned && (
                   <li className="header__nav-item">
-                    <a className="header__nav-link" href="#">
+                    <button className="header__nav-link button-reset" type="button">
                       <span className="header__signout">Sign out</span>
-                    </a>
+                    </button>
                   </li>
                 )}
               </ul>

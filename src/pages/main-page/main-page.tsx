@@ -1,13 +1,16 @@
-import PlaceCard from '../../components/place-card/place-card';
+import { useState } from 'react';
+import { Offer } from '../../mocks/offers/offers-types';
 import Header from '../../components/header/header';
-
+import PlacesList from '../../components/places-list/places-list';
+import Sort from '../../components/sort/sort';
+import OffersMap from '../../components/offers-map/offers-map';
 
 type MainPageProps = {
-  places: number;
-}
+  offers: Offer[];
+};
 
-function MainPage({ places }: MainPageProps): JSX.Element{
-
+function MainPage({ offers }: MainPageProps): JSX.Element{
+  const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
   return (
     <div className="page page--gray page--main">
       <Header isSigned={false} favourites={3} isMainPage />
@@ -54,83 +57,18 @@ function MainPage({ places }: MainPageProps): JSX.Element{
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{places} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>{' '}
-                <span className="places__sorting-type" tabIndex={0} >
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--closed">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <div className="cities__places-list places__list tabs__content">
-                <PlaceCard
-                  id = '1'
-                  title = 'Beautiful & luxurious apartment at great location'
-                  type = 'Apartment'
-                  price = {120}
-                  rating = {4}
-                  previewImage = 'img/apartment-01.jpg'
-                  isPremium
-                  isFavourite = {false}
-                />
-
-                <PlaceCard
-                  id = '2'
-                  title = 'Wood and stone place'
-                  type = 'Room'
-                  price = {80}
-                  rating = {4}
-                  previewImage = 'img/room.jpg'
-                  isPremium = {false}
-                  isFavourite
-                />
-
-                <PlaceCard
-                  id = '3'
-                  title = 'Canal View Prinsengracht'
-                  type = 'Apartment'
-                  price = {132}
-                  rating = {4}
-                  previewImage = 'img/apartment-02.jpg'
-                  isPremium = {false}
-                  isFavourite = {false}
-                />
-
-                <PlaceCard
-                  id = '4'
-                  title = 'Nice, cozy, warm big bed apartment'
-                  type = 'Apartment'
-                  price = {180}
-                  rating = {5}
-                  previewImage = 'img/apartment-03.jpg'
-                  isPremium
-                  isFavourite = {false}
-                />
-
-                <PlaceCard
-                  id = '5'
-                  title = 'Wood and stone place'
-                  type = 'Room'
-                  price = {80}
-                  rating = {4}
-                  previewImage = 'img/room.jpg'
-                  isPremium = {false}
-                  isFavourite
-                />
-              </div>
+              <b className="places__found">312 places to stay in Amsterdam</b>
+              <Sort />
+              <PlacesList
+                offers={offers}
+                onOfferHover={setActiveOfferId}
+              />
             </section>
 
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
+            <OffersMap
+              offers={offers}
+              activeOfferId={activeOfferId}
+            />
           </div>
         </div>
       </main>
