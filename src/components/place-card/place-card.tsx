@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Offer } from '../../mocks/offers/offers-types';
 
 type PlaceCardProps = Offer & {
-  cardType?: 'cities' | 'favorites';
+  cardType?: 'cities' | 'favorites' | 'near-places';
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
 }

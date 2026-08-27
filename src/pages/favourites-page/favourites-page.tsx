@@ -1,6 +1,8 @@
 import { Offer } from '../../mocks/offers/offers-types';
 import Header from '../../components/header/header';
 import PlaceCard from '../../components/place-card/place-card';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type FavouritesPageProps = {
   offers: Offer[];
@@ -52,9 +54,9 @@ function FavouritesPage({offers}: FavouritesPageProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.ROOT}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );
