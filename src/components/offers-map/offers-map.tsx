@@ -48,7 +48,7 @@ function OffersMap({offers, city, activeOfferId}: MapProps): JSX.Element {
   [map, offers, activeOfferId]
   );
   return (
-    <section className="cities__map map ref={mapRef}"></section>
+    <section className="cities__map map" ref={mapRef}></section>
   );
 }
 

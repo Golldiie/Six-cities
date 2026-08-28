@@ -19,9 +19,9 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
       setMap(instance);
 
       const layer = new TileLayer(
-        'https://{s}://{z}/{x}/{y}{r}.png',
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         {
-          attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors &copy; <a href="https://carto.com">CARTO</a>',
+          attribution: '&copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
         }
       );
 
