@@ -64,11 +64,12 @@ function MainPage({ offers }: MainPageProps): JSX.Element{
                 onOfferHover={setActiveOfferId}
               />
             </section>
-
-            <OffersMap
-              offers={offers}
-              activeOfferId={activeOfferId}
-            />
+            <div className="cities__right-section">
+              <OffersMap
+                offers={offers}
+                activeOfferId={activeOfferId}
+              />
+            </div>
           </div>
         </div>
       </main>
