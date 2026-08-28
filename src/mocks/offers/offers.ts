@@ -239,15 +239,15 @@ const mockOffers: Offer[] = [
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
+        'latitude': 52.37403,
+        'longitude': 4.88969,
         'zoom': 8
       }
     },
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
-      'zoom': 8
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 12
     },
     'isFavorite': true,
     'isPremium': false,
@@ -255,22 +255,22 @@ const mockOffers: Offer[] = [
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/16.jpg'
   },
   {
-    'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    'id': '6af6f711-c28d-4121-82cd-e0b462a27f01',
     'title': 'Beautiful & luxurious studio at great location',
     'type': 'apartment',
     'price': 120,
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
-        'zoom': 8
+        'latitude': 52.37403,
+        'longitude': 4.88969,
+        'zoom': 12
       }
     },
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
-      'zoom': 8
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 12
     },
     'isFavorite': true,
     'isPremium': false,
@@ -278,22 +278,45 @@ const mockOffers: Offer[] = [
     'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/16.jpg'
   },
   {
-    'id': '6af6f711-c28d-4121-82cd-e0b462a27f00',
+    'id': '6af6f711-c28d-4121-82cd-e0b462a27f02',
     'title': 'Beautiful & luxurious studio at great location',
     'type': 'apartment',
     'price': 120,
     'city': {
       'name': 'Amsterdam',
       'location': {
-        'latitude': 52.35514938496378,
-        'longitude': 4.673877537499948,
-        'zoom': 8
+        'latitude': 52.37403,
+        'longitude': 4.88969,
+        'zoom': 12
       }
     },
     'location': {
-      'latitude': 52.35514938496378,
-      'longitude': 4.673877537499948,
-      'zoom': 8
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
+      'zoom': 12
+    },
+    'isFavorite': true,
+    'isPremium': false,
+    'rating': 4,
+    'previewImage': 'https://16.design.htmlacademy.pro/static/hotel/16.jpg'
+  },
+  {
+    'id': '6af6f711-c28d-4121-82cd-e0b462a27f03',
+    'title': 'Beautiful & luxurious studio at great location',
+    'type': 'apartment',
+    'price': 120,
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37403,
+        'longitude': 4.88969,
+        'zoom': 12
+      }
+    },
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 12
     },
     'isFavorite': true,
     'isPremium': false,
