@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { mockOffers } from '../../mocks/offers/offers';
+import { mockReviews } from '../../mocks/reviews/reviews';
 import { Offer } from '../../mocks/offers/offers-types';
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
@@ -116,7 +117,9 @@ function OfferPage(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <OfferReviews />
+              <OfferReviews
+                reviews={mockReviews}
+              />
             </div>
           </div>
           <OffersMap
