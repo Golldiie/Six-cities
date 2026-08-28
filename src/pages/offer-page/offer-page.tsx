@@ -1,14 +1,18 @@
 import { useParams } from 'react-router-dom';
 import { mockOffers } from '../../mocks/offers/offers';
+import { Offer } from '../../mocks/offers/offers-types';
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
 import PlaceCard from '../../components/place-card/place-card';
+import OffersMap from '../../components/offers-map/offers-map';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
 
   const offer = mockOffers.find((item) => item.id === id);
+  const mapOffers: Offer[] = [mockOffers[0], mockOffers[1], mockOffers[2], offer].filter(Boolean) as Offer[];
+
   if (!offer) {
     return <div>Offer not found</div>;
   }
@@ -115,7 +119,12 @@ function OfferPage(): JSX.Element {
               <OfferReviews />
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <OffersMap
+            offers={mapOffers}
+            city={offer.city}
+            activeOfferId={offer.id}
+            className="offer__map"
+          />
         </section>
         <div className="container">
           <section className="near-places places">

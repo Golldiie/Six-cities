@@ -3,6 +3,13 @@ import { Icon, layerGroup, Marker } from 'leaflet';
 import { City, Offer } from '../../mocks/offers/offers-types';
 import useMap from '../../hooks/use-map';
 
+type MapProps = {
+  offers: Offer[];
+  city: City;
+  activeOfferId: string | null;
+  className: string;
+};
+
 const defaultCustomIcon = new Icon({
   iconUrl: 'img/pin.svg',
   iconSize: [27, 39],
@@ -15,13 +22,7 @@ const currentCustomIcon = new Icon({
   iconAnchor: [13.5, 39]
 });
 
-type MapProps = {
-  offers: Offer[];
-  city: City;
-  activeOfferId: string | null;
-};
-
-function OffersMap({offers, city, activeOfferId}: MapProps): JSX.Element {
+function OffersMap({offers, city, activeOfferId, className}: MapProps): JSX.Element {
   const mapRef = useRef<HTMLDivElement | null>(null);
 
   const map = useMap(mapRef, city);
@@ -48,7 +49,7 @@ function OffersMap({offers, city, activeOfferId}: MapProps): JSX.Element {
   [map, offers, activeOfferId]
   );
   return (
-    <section className="cities__map map" ref={mapRef}></section>
+    <section className={`${className} map`} ref={mapRef}></section>
   );
 }
 
