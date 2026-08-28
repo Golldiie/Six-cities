@@ -5,8 +5,8 @@ import { Offer } from '../../mocks/offers/offers-types';
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
-import PlaceCard from '../../components/place-card/place-card';
 import OffersMap from '../../components/offers-map/offers-map';
+import PlacesList from '../../components/places-list/places-list';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
@@ -132,11 +132,11 @@ function OfferPage(): JSX.Element {
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <PlaceCard {...mockOffers[0]} cardType="near-places" />
-              <PlaceCard {...mockOffers[1]} cardType="near-places" />
-              <PlaceCard {...mockOffers[2]} cardType="near-places" />
-            </div>
+            <PlacesList
+              offers={[mockOffers[0], mockOffers[1], mockOffers[2]]}
+              className="near-places"
+              cardType="near-places"
+            />
           </section>
         </div>
       </main>

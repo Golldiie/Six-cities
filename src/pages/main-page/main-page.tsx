@@ -66,6 +66,8 @@ function MainPage({ offers }: MainPageProps): JSX.Element{
               <Sort />
               <PlacesList
                 offers={amsterdamOffers}
+                className='cities'
+                cardType='cities'
                 onOfferHover={setActiveOfferId}
               />
             </section>
