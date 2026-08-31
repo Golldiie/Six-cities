@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { mockOffers } from '../../mocks/offers/offers';
+import { mockReviews } from '../../mocks/reviews/reviews';
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
@@ -111,7 +112,7 @@ function OfferNoLogged(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <OfferReviews />
+              <OfferReviews reviews={mockReviews} />
             </div>
           </div>
           <section className="offer__map map"></section>
