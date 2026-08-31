@@ -3,18 +3,21 @@ import { Offer } from '../../mocks/offers/offers-types';
 
 type PlaceListProps = {
   offers: Offer[];
-  onOfferHover: (id: string | null) => void;
+  className: string;
+  cardType?: 'cities' | 'near-places';
+  onOfferHover?: (id: string | null) => void;
 }
 
-function PlacesList({offers, onOfferHover}:PlaceListProps): JSX.Element {
+function PlacesList({offers, className, cardType, onOfferHover}:PlaceListProps): JSX.Element {
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={`${className}__places-list places__list tabs__content`}>
       {offers.map((offer) => (
         <PlaceCard
           key={offer.id}
           {...offer}
-          onMouseEnter={() => onOfferHover(offer.id)}
-          onMouseLeave={() => onOfferHover(null)}
+          cardType={cardType}
+          onMouseEnter={() => onOfferHover?.(offer.id)}
+          onMouseLeave={() => onOfferHover?.(null)}
         />
       ))}
     </div>

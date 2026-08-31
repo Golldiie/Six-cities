@@ -1,14 +1,19 @@
 import { useParams } from 'react-router-dom';
 import { mockOffers } from '../../mocks/offers/offers';
+import { mockReviews } from '../../mocks/reviews/reviews';
+import { Offer } from '../../mocks/offers/offers-types';
 import Header from '../../components/header/header';
 import OfferGallery from '../../components/offer-gallery/offer-gallery';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
-import PlaceCard from '../../components/place-card/place-card';
+import OffersMap from '../../components/offers-map/offers-map';
+import PlacesList from '../../components/places-list/places-list';
 
 function OfferPage(): JSX.Element {
   const { id } = useParams();
 
   const offer = mockOffers.find((item) => item.id === id);
+  const mapOffers: Offer[] = [mockOffers[0], mockOffers[1], mockOffers[2], offer].filter(Boolean) as Offer[];
+
   if (!offer) {
     return <div>Offer not found</div>;
   }
@@ -112,19 +117,26 @@ function OfferPage(): JSX.Element {
                   </p>
                 </div>
               </div>
-              <OfferReviews />
+              <OfferReviews
+                reviews={mockReviews}
+              />
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <OffersMap
+            offers={mapOffers}
+            city={offer.city}
+            activeOfferId={offer.id}
+            className="offer__map"
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              <PlaceCard {...mockOffers[0]} cardType="near-places" />
-              <PlaceCard {...mockOffers[1]} cardType="near-places" />
-              <PlaceCard {...mockOffers[2]} cardType="near-places" />
-            </div>
+            <PlacesList
+              offers={[mockOffers[0], mockOffers[1], mockOffers[2]]}
+              className="near-places"
+              cardType="near-places"
+            />
           </section>
         </div>
       </main>
