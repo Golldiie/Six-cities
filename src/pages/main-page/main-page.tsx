@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Offer } from '../../mocks/offers/offers-types';
+import { CITIES } from '../../const';
 import Header from '../../components/header/header';
 import PlacesList from '../../components/places-list/places-list';
 import Sort from '../../components/sort/sort';
@@ -9,12 +10,13 @@ type MainPageProps = {
   offers: Offer[];
 };
 
-function MainPage({ offers }: MainPageProps): JSX.Element{
+function MainPage({ offers }: MainPageProps): JSX.Element {
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const [currentCityName, setCurrentCityName] = useState<string>('Amsterdam');
 
-  const amsterdamOffers = offers.filter((offer) => offer.city.name === 'Amsterdam');
+  const filteredOffers = offers.filter((offer) => offer.city.name === currentCityName);
 
-  const currentCity = amsterdamOffers[0]?.city;
+  const currentCity = filteredOffers[0]?.city ?? offers[0]?.city;
 
   return (
     <div className="page page--gray page--main">
@@ -25,36 +27,18 @@ function MainPage({ offers }: MainPageProps): JSX.Element{
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+              {CITIES.map((city) => (
+                <li className="locations__item" key={city}>
+                  <button
+                    className={`locations__item-link tabs__item ${city === currentCityName ? 'tabs__item--active' : ''}`}
+                    type="button"
+                    onClick={() => setCurrentCityName(city)}
+                    style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
+                  >
+                    <span>{city}</span>
+                  </button>
+                </li>
+              ))}
             </ul>
           </section>
         </div>
@@ -62,22 +46,26 @@ function MainPage({ offers }: MainPageProps): JSX.Element{
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{amsterdamOffers.length} places to stay in Amsterdam</b>
+              {/* Переменная amsterdamOffers заменена на filteredOffers и динамический текст */}
+              <b className="places__found">{filteredOffers.length} places to stay in {currentCityName}</b>
               <Sort />
               <PlacesList
-                offers={amsterdamOffers}
+                offers={filteredOffers}
                 className='cities'
                 cardType='cities'
                 onOfferHover={setActiveOfferId}
               />
             </section>
             <div className="cities__right-section">
-              <OffersMap
-                offers={amsterdamOffers}
-                city={currentCity}
-                activeOfferId={activeOfferId}
-                className='cities__map'
-              />
+              {/* Карта рендерится только если объект города успешно найден */}
+              {currentCity && (
+                <OffersMap
+                  offers={filteredOffers}
+                  city={currentCity}
+                  activeOfferId={activeOfferId}
+                  className='cities__map'
+                />
+              )}
             </div>
           </div>
         </div>
