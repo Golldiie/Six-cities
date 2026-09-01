@@ -6,6 +6,7 @@ import { getSortedOffers } from '../../utils/sort';
 import { cityChange } from '../../store/action';
 import Header from '../../components/header/header';
 import CitiesList from '../../components/cities-list/cities-list';
+import MainEmpty from './main-empty';
 import PlacesList from '../../components/places-list/places-list';
 import Sort from '../../components/sort/sort';
 import OffersMap from '../../components/offers-map/offers-map';
@@ -32,7 +33,7 @@ function MainPage(): JSX.Element {
     <div className="page page--gray page--main">
       <Header isSigned={false} favourites={3} isMainPage />
 
-      <main className="page__main page__main--index">
+      <main className={`page__main page__main--index ${filteredOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
@@ -43,34 +44,36 @@ function MainPage(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              {/* Переменная amsterdamOffers заменена на filteredOffers и динамический текст */}
-              <b className="places__found">{filteredOffers.length} places to stay in {currentCityName}</b>
-              <Sort
-                currentSortType={currentSortType}
-                onChangeSortType={setCurrentSortType}
-              />
-              <PlacesList
-                offers={sortedOffers}
-                className='cities'
-                cardType='cities'
-                onOfferHover={setActiveOfferId}
-              />
-            </section>
-            <div className="cities__right-section">
-              {/* Карта рендерится только если объект города успешно найден */}
-              {currentCity && (
-                <OffersMap
-                  offers={sortedOffers}
-                  city={currentCity}
-                  activeOfferId={activeOfferId}
-                  className='cities__map'
+          {filteredOffers.length === 0 ? (
+            <MainEmpty cityName={currentCityName} />
+          ) : (
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
+                <b className="places__found">{filteredOffers.length} places to stay in {currentCityName}</b>
+                <Sort
+                  currentSortType={currentSortType}
+                  onChangeSortType={setCurrentSortType}
                 />
-              )}
+                <PlacesList
+                  offers={sortedOffers}
+                  className='cities'
+                  cardType='cities'
+                  onOfferHover={setActiveOfferId}
+                />
+              </section>
+              <div className="cities__right-section">
+                {currentCity && (
+                  <OffersMap
+                    offers={sortedOffers}
+                    city={currentCity}
+                    activeOfferId={activeOfferId}
+                    className='cities__map'
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </main>
     </div>

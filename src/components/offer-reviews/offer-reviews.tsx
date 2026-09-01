@@ -7,6 +7,8 @@ type OfferReviewsProps = {
 }
 
 function OfferReviews({reviews}: OfferReviewsProps): JSX.Element{
+  const isRenderCommentForm = false;
+
   return (
     <section className="offer__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
@@ -15,7 +17,7 @@ function OfferReviews({reviews}: OfferReviewsProps): JSX.Element{
           <ReviewItem key={review.id} review={review} />
         ))}
       </ul>
-      <ReviewForm />
+      {isRenderCommentForm && <ReviewForm />}
     </section>
   );
 }
