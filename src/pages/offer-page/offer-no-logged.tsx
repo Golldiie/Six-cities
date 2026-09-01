@@ -10,6 +10,8 @@ function OfferNoLogged(): JSX.Element {
   const { id } = useParams();
 
   const offer = mockOffers.find((item) => item.id === id);
+  const mapOffers: Offer[] = [mockOffers[0], mockOffers[1], mockOffers[2], offer].filter(Boolean) as Offer[];
+
   if (!offer) {
     return <div>Offer not found</div>;
   }
@@ -115,7 +117,12 @@ function OfferNoLogged(): JSX.Element {
               <OfferReviews reviews={mockReviews} />
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <OffersMap
+            offers={mapOffers}
+            city={offer.city}
+            activeOfferId={offer.id}
+            className="offer__map"
+          />
         </section>
         <div className="container">
           <section className="near-places places">
