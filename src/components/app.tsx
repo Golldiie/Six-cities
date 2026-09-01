@@ -1,6 +1,5 @@
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import { AppRoute } from '../const';
-import { Offer } from '../mocks/offers/offers-types';
 import { mockOffers } from '../mocks/offers/offers';
 import MainPage from '../pages/main-page/main-page';
 import FavouritesPage from '../pages/favourites-page/favourites-page';
@@ -9,17 +8,14 @@ import OfferPage from '../pages/offer-page/offer-page';
 import PrivateRoute from './private-route/private-route';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 
-type AppProps = {
-  offers: Offer[];
-};
 
-function App({ offers }: AppProps): JSX.Element {
+function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.ROOT}
-          element={<MainPage offers={offers} />}
+          element={<MainPage />}
         />
         <Route
           path={AppRoute.LOGIN} element = {<LoginPage />}

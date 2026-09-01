@@ -1,20 +1,30 @@
-import { useState } from 'react';
-import { Offer } from '../../mocks/offers/offers-types';
-import { CITIES } from '../../const';
+import { useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import { SortOption } from '../../const';
+import { getSortedOffers } from '../../utils/sort';
+import { cityChange } from '../../store/action';
 import Header from '../../components/header/header';
+import CitiesList from '../../components/cities-list/cities-list';
 import PlacesList from '../../components/places-list/places-list';
 import Sort from '../../components/sort/sort';
 import OffersMap from '../../components/offers-map/offers-map';
 
-type MainPageProps = {
-  offers: Offer[];
-};
 
-function MainPage({ offers }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
+  const dispatch = useDispatch();
+
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const [currentCityName, setCurrentCityName] = useState<string>('Amsterdam');
+  const currentCityName = useSelector((state: RootState) => state.city);
 
+  const offers = useSelector((state: RootState) => state.offers);
   const filteredOffers = offers.filter((offer) => offer.city.name === currentCityName);
+
+  const [currentSortType, setCurrentSortType] = useState<string>(SortOption.Popular);
+  const sortedOffers = useMemo(() =>
+    getSortedOffers(filteredOffers, currentSortType),
+  [filteredOffers, currentSortType]
+  );
 
   const currentCity = filteredOffers[0]?.city ?? offers[0]?.city;
 
@@ -26,20 +36,10 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              {CITIES.map((city) => (
-                <li className="locations__item" key={city}>
-                  <button
-                    className={`locations__item-link tabs__item ${city === currentCityName ? 'tabs__item--active' : ''}`}
-                    type="button"
-                    onClick={() => setCurrentCityName(city)}
-                    style={{ background: 'none', border: 'none', font: 'inherit', cursor: 'pointer' }}
-                  >
-                    <span>{city}</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
+            <CitiesList
+              currentCityName={currentCityName}
+              onCityClick={(city) => dispatch(cityChange(city))}
+            />
           </section>
         </div>
         <div className="cities">
@@ -48,9 +48,12 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               {/* Переменная amsterdamOffers заменена на filteredOffers и динамический текст */}
               <b className="places__found">{filteredOffers.length} places to stay in {currentCityName}</b>
-              <Sort />
+              <Sort
+                currentSortType={currentSortType}
+                onChangeSortType={setCurrentSortType}
+              />
               <PlacesList
-                offers={filteredOffers}
+                offers={sortedOffers}
                 className='cities'
                 cardType='cities'
                 onOfferHover={setActiveOfferId}
@@ -60,7 +63,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
               {/* Карта рендерится только если объект города успешно найден */}
               {currentCity && (
                 <OffersMap
-                  offers={filteredOffers}
+                  offers={sortedOffers}
                   city={currentCity}
                   activeOfferId={activeOfferId}
                   className='cities__map'
