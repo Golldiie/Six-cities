@@ -9,8 +9,10 @@ type PlaceListProps = {
 }
 
 function PlacesList({offers, className, cardType, onOfferHover}:PlaceListProps): JSX.Element {
+  const listModifier = className === 'cities' ? 'places-list' : 'list';
+
   return (
-    <div className={`${className}__places-list places__list tabs__content`}>
+    <div className={`${className}__${listModifier} places__list ${className === 'cities' ? 'tabs__content' : ''}`}>
       {offers.map((offer) => (
         <PlaceCard
           key={offer.id}
